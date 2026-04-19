@@ -9,13 +9,15 @@ from .views import (
     get_review,
     create_review,
     update_review,
-    delete_review
+    delete_review,
+    import_movie
 )
 
 urlpatterns = [
     path("movies/", get_movies),
     path("movies/<int:id>/", get_movie),
     path("movies/create/", create_movie),
+    path("movies/import/<int:tmdb_id>/", import_movie),
     path("movies/<int:id>/update/", update_movie),
     path("movies/<int:id>/delete/", delete_movie),
     path("reviews/", get_reviews),

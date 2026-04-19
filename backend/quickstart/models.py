@@ -15,14 +15,14 @@ class Studio(models.Model):
         return self.name
     
 class Movie(models.Model):
-    tmdb_id = models.IntegerField(unique=True)
+    tmdb_id = models.IntegerField(unique=True, null=True, blank=True)
     title = models.CharField(max_length=70)
     country = models.CharField(max_length=50)
     release_date = models.DateField(blank= True, null = False)
     description = models.TextField(max_length=500)
     studio = models.ForeignKey(Studio, on_delete=models.CASCADE, related_name="movies")
     genres = models.ManyToManyField(Genre, related_name="movies")
-    length = models.IntegerField(blank=True, null=False)
+    length = models.IntegerField(blank=True, null=True)
     image = models.URLField(blank=True)
     gross = models.FloatField(max_length=25)
     vote_average = models.FloatField(blank=True, null=True)
@@ -49,7 +49,7 @@ class Review(models.Model):
     score = models.FloatField(blank=False, null=False)
     createdAt = models.DateField(auto_now_add=True)
 
-    def __str__(self):
+    def __int__(self):
         return self.id
     
 class Actor(models.Model):
