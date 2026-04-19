@@ -1,0 +1,96 @@
+.movie-card-container{
+    display: flex;
+    padding: 1rem;
+    gap: 2rem;
+    align-items: center;
+}
+
+.movie-card-container h1,
+.movie-card-container p,
+.movie-card-container h3,
+.movie-card-container h4{
+    margin: 0;
+}
+
+.movie-card-image{
+    width: 65%;
+}
+
+.movie-card-image img{
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+.movie-card-data{
+    width: 100%;
+}
+
+.movie-card-genres{
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+}
+
+.genre-element{
+    background-color: rgb(226, 43, 43);
+    margin: 1.5rem 0rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.genre-element h4{
+    margin: 0;
+}
+
+.movie-card-rating, .rating-legend{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.rating-legend h3{
+    color: rgb(230, 81, 81);
+}
+
+.movie-card-vote-count{
+    display: flex;
+    margin: 1rem 0rem;
+    gap: 0.5rem;
+    align-items: center;
+    color: rgb(180, 180, 180);
+}
+
+.movie-card-description{
+    margin: 1rem 0rem;
+}
+
+.movie-card-specs{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: 1rem;
+    margin: 2rem 0rem;
+}
+
+.spec-element{
+    background-color: rgb(58, 58, 58);
+    display: flex;
+    padding: 0.5rem;
+    border-radius: 5px;
+    gap: 0.5rem;
+}
+
+@media(max-width: 800px) {
+
+.movie-card-container{
+    display: grid;
+    padding: 1rem;
+    gap: 2rem;
+    align-items: center;
+    }
+
+.movie-card-image{
+    width: 100%;
+}
+
+}

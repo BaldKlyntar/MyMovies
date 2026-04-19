@@ -1,0 +1,43 @@
+.banner-container{
+    position:relative;
+}
+
+.banner-movie-element{
+    height: 28rem;
+}
+
+.banner-movie-image{
+    height: 45rem;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.banner-movie-image img{
+    width: 15%;
+    object-fit: cover;
+    height: 40rem;
+    opacity: 0.2;
+
+}
+
+.banner-movie-info{
+    width: 45%;
+    padding: 5rem;
+}
+.banner-movie-specs{
+    display: flex;
+    gap: 1rem;
+}
+
+.banner-movie-specs p{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+}
+
+.big-button{
+    margin-top: 2rem;
+}

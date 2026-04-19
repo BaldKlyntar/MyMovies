@@ -1,0 +1,32 @@
+.review-form-container{
+    align-items: center;
+    justify-items: center;
+    margin-top: 2rem;
+}
+
+.review-form{
+    width: 75%;
+    background-color: rgb(51, 51, 51);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.review-inputs textarea{
+    width: 100%;
+    border-radius: 5px;
+    height: 10rem;
+    border-color: transparent;
+}
+
+.review-inputs input{
+    width: 25%;
+    border-radius: 5px;
+    border-color: transparent;
+    height: 2rem;
+}
+
+.review-form-container button{
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}

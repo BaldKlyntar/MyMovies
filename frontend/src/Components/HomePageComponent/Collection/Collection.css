@@ -1,0 +1,39 @@
+.new-product-header{
+    
+    padding: 0 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+
+
+}
+
+.arrow-buttons{
+
+    height: fit-content;
+    display: flex;
+    gap: 1rem;
+    align-self: center;
+    position: relative;
+
+}
+
+.item-list{
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: none;
+    border-radius: 5px;
+    scroll-behavior:smooth;
+
+}
+
+.arrow-button{
+    background-color: red;
+    border: transparent;
+    border-radius: 5px;
+    width: 3rem;
+    height: 2rem;
+    cursor: pointer;
+}

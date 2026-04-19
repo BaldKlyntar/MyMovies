@@ -1,0 +1,55 @@
+.item-container{
+    padding: 1rem;
+}
+
+.item-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+
+.item-image img{
+    width: 15rem;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+
+}
+
+
+.item-image img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 10px #000000;
+}
+
+.item-image img:hover::before {
+  opacity: 1;
+  transform: rotate(-45deg) translateY(100%);
+}
+
+
+
+.item-specs{
+    height: fit-content;
+    line-height: 8px;
+
+}
+
+.item-specs button{
+    width: 100%;
+    background-color: black;
+    color: #F9E46F;
+}
+
+.item-title{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 200px;
+    height: 1rem;
+    padding-top: 0.5rem;
+}
