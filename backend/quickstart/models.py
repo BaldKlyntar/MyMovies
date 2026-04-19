@@ -53,6 +53,7 @@ class Review(models.Model):
         return self.id
     
 class Actor(models.Model):
+    tmdb_id = models.IntegerField(unique=True)
     name = models.CharField(blank=False, null=False, max_length=50)
     country = models.CharField(blank=False, null=False)
     image = models.URLField(blank=False, null=False)

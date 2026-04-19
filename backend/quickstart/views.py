@@ -68,13 +68,13 @@ def import_movie(request, tmdb_id):
         movie.genres.add(genre)
 
     credits = fetch_movie_credits(tmdb_id)
-    print(credits)
 
     if credits:
         for actor_data in credits.get("cast", [])[:10]:
             actor, _ = Actor.objects.get_or_create(
-                name=actor_data.get("name"),
+                tmdb_id = actor_data.get("id"),
                 defaults={
+                    "name": actor_data.get("name"),
                     "image": f"https://image.tmdb.org/t/p/w500{actor_data.get('profile_path')}"
                     if actor_data.get("profile_path") else ""
                 }
