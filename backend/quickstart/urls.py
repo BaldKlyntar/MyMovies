@@ -4,7 +4,12 @@ from .views import (
     get_movie,
     create_movie,
     update_movie,
-    delete_movie
+    delete_movie,
+    get_reviews,
+    get_review,
+    create_review,
+    update_review,
+    delete_review
 )
 
 urlpatterns = [
@@ -13,4 +18,9 @@ urlpatterns = [
     path("movies/create/", create_movie),
     path("movies/<int:id>/update/", update_movie),
     path("movies/<int:id>/delete/", delete_movie),
+    path("reviews/", get_reviews),
+    path("reviews/<int:id>/", get_review),
+    path("reviews/create/", create_review),
+    path("reviews/<int:id>/update/", update_review),
+    path("reviews/<int:id>/delete/", delete_review),
 ]

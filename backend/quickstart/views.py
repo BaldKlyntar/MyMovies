@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Movie
-from .serializers import MovieSerializer
+from .models import Movie,  Review
+from .serializers import MovieSerializer, ReviewSerializer, MovieDetailSerializer
 from rest_framework import status
 
 #----------------------------------------MOVIES----------------------------------------------
@@ -15,11 +15,11 @@ def get_movies(request):
 @api_view(['GET'])
 def get_movie(request, id):
     try:
-        movie = Movie.objects.get(id=id)
+        movie = Movie.objects.prefetch_related('roles__actor', 'reviews').get(id=id)
     except Movie.DoesNotExist:
         return Response({'error': 'Pelicula no encontrada'}, status=status.HTTP_404_NOT_FOUND)
     
-    serializer = MovieSerializer(movie)
+    serializer = MovieDetailSerializer(movie)
     return Response(serializer.data)
 
 @api_view(['POST'])
@@ -56,3 +56,57 @@ def delete_movie(request, id):
 
     movie.delete()
     return Response({"message": "Movie deleted"}, status=status.HTTP_204_NO_CONTENT)
+
+
+#-------------------------------------------------REVIEWS---------------------------------------
+
+@api_view(['GET'])
+def get_reviews(request):
+    reviews = Review.objects.all()
+    serializer = ReviewSerializer(reviews, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def get_review(request, id):
+    try:
+        review = Review.objects.get(id=id)
+    except Review.DoesNotExist:
+        return Response({"error": "Review not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = ReviewSerializer(review)
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def create_review(request):
+    serializer = ReviewSerializer(data=request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PUT', 'PATCH'])
+def update_review(request, id):
+    try:
+        review = Review.objects.get(id=id)
+    except Review.DoesNotExist:
+        return Response({"error": "Review not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    serializer = ReviewSerializer(review, data=request.data, partial=True)
+
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_review(request, id):
+    try:
+        review = Review.objects.get(id=id)
+    except Review.DoesNotExist:
+        return Response({"error": "Review not found"}, status=status.HTTP_404_NOT_FOUND)
+
+    review.delete()
+    return Response({"message": "Review deleted"}, status=status.HTTP_204_NO_CONTENT)
