@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Movie,  Review, Genre, Studio, Actor, Role
-from .serializers import MovieSerializer, ReviewSerializer, MovieDetailSerializer
+from .serializers import MovieSerializer, ReviewSerializer, MovieDetailSerializer, ActorSerializer, GenreSerializer
 from rest_framework import status
 from .utils.tmdb import fetch_movie, map_movie_data, fetch_movie_credits
 
@@ -16,7 +16,7 @@ def get_movies(request):
 @api_view(['GET'])
 def get_movie(request, id):
     try:
-        movie = Movie.objects.prefetch_related('roles__actor', 'reviews').get(id=id)
+        movie = Movie.objects.prefetch_related('roles__actor', 'reviews', 'genres', 'studio').get(id=id)
     except Movie.DoesNotExist:
         return Response({'error': 'Pelicula no encontrada'}, status=status.HTTP_404_NOT_FOUND)
     
@@ -169,3 +169,12 @@ def delete_review(request, id):
 
     review.delete()
     return Response({"message": "Review deleted"}, status=status.HTTP_204_NO_CONTENT)
+
+
+#----------------------------------------ACTORS----------------------------------------------
+
+@api_view(['GET'])
+def get_actors(request):
+    actors = Actor.objects.all()
+    serializer = ActorSerializer(actors, many=True)
+    return Response(serializer.data)
