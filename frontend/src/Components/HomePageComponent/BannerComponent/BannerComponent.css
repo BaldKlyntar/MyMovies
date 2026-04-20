@@ -1,31 +1,29 @@
-.banner-container{
-    position:relative;
-}
-
 .banner-movie-element{
-    height: 28rem;
+    display: flex;
+    background: linear-gradient(45deg, rgb(53, 53, 53), rgb(150, 41, 41));
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .banner-movie-image{
-    height: 45rem;
-    width: 100%;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding: 1rem 0rem;
 }
 
 .banner-movie-image img{
-    width: 15%;
-    object-fit: cover;
-    height: 40rem;
-    opacity: 0.2;
+    width: 65%;
+    border-radius: 10px;
 
 }
 
 .banner-movie-info{
-    width: 45%;
-    padding: 5rem;
+    width: 50%;
+
 }
+
 .banner-movie-specs{
     display: flex;
     gap: 1rem;

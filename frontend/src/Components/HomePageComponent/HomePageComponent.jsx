@@ -25,7 +25,7 @@ const HomePageComponent = ({movies}) => {
   const recommended_movies = movies.slice(5, 15)
 
   return (
-    <div>
+    <div className='home-page-container'>
         <BannerComponent banner_movies={banner_movies}/>
         <Collection label={'Peliculas nuevas'} movies={new_movies}/>
         <Collection label={'Recomendado para ti'} movies={recommended_movies}/>
