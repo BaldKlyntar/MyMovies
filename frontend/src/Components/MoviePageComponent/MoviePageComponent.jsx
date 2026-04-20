@@ -6,32 +6,32 @@ import { getMovies } from '../../Utils/tmdb_api'
 import MovieCard from './MovieCard/MovieCard'
 import ReviewForm from './ReviewForm/ReviewForm'
 import ReviewList from './ReviewList/ReviewList'
+import customFetch from '../../Utils/customFetch'
 
-const MoviePageComponent = () => {
+export const loader = async ({ params }) => {
 
-  const [movies, setMovies] = useState([])
+  const { id } = params
+  try {
+    const { data } = await customFetch.get(`/movies/${id}`)
+    return data
+    
+  } catch (error) {
+    console.log(error)
+    return null
+    
+  }
+}
+
+
+const MoviePageComponent = ({movie}) => {
   
-  const loadMovies = async () => {
-      const movies = await getMovies();
-      setMovies(movies)
-    };
-  
-      useEffect(() => {
-          loadMovies()
-    }, []);
-
-  const { id } = useParams();
-
-  const movie = movies.find(u => u.id === Number(id))
-
-
-  
-
+  let movie_reviews = movie.reviews
+  console.log(movie_reviews)
   return (
     <div className="movie-page-container">
       <MovieCard {...movie}/>
       <ReviewForm {...movie} />
-      <ReviewList/>
+      <ReviewList reviews = {movie_reviews}/>
     </div>
   )
 }

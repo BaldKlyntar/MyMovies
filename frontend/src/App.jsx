@@ -5,6 +5,9 @@ import {
   MoviePage,
  } from './Pages'
 
+ import { loader as movieLoader } from './Components/HomePageComponent/HomePageComponent'
+ import { loader as singleMovieLoader } from './Components/MoviePageComponent/MoviePageComponent'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -12,11 +15,14 @@ const router = createBrowserRouter([
     children:[
       {
         index: true,
-        element: <HomePage/>
+        element: <HomePage/>,
+        loader: movieLoader
+        
       },
       {
         path: 'movie/:id',
-        element: <MoviePage/>
+        element: <MoviePage/>,
+        loader: singleMovieLoader
 
       }
     ]

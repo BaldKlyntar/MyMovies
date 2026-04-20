@@ -10,6 +10,8 @@ import { MdAttachMoney } from "react-icons/md";
 
 const MovieCard = (props) => {
 
+    console.log(props)
+
     let genre_list =[
         {
             genre: 'Accion'
@@ -28,12 +30,12 @@ const MovieCard = (props) => {
         {
             logo: <FaClock size={25} color='rgb(230, 81, 81)'/>,
             label: 'Duracion',
-            data: '1h 30m'
+            data: `${props.length} m`
         },
         {
             logo: <IoLocationSharp size={25} color='rgb(230, 81, 81)'/>,
             label: 'Pais',
-            data: 'Estados Unidos'
+            data: props.country
         },
         {
             logo: <MdMovie size={25} color='rgb(230, 81, 81)'/>,
@@ -43,13 +45,13 @@ const MovieCard = (props) => {
         {
             logo: <MdAttachMoney size={25} color='rgb(230, 81, 81)'/>,
             label: 'Box Office',
-            data: '892.5M'
+            data: props.gross
         }
     ]
   return (
     <div className="movie-card-container">
         <div className="movie-card-image">
-            <img src={`https://image.tmdb.org/t/p/w500${props.poster_path}`} alt="" />
+            <img src={props.image} alt="" />
         </div>
         <div className="movie-card-data">
             <div className="movie-card-title">
@@ -75,7 +77,7 @@ const MovieCard = (props) => {
                 </div>
             </div>
             <div className="movie-card-description">
-                <p>{props.overview}</p>
+                <p>{props.description}</p>
             </div>
             <div className="movie-card-specs">
                 {

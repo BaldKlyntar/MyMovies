@@ -9,7 +9,7 @@ const Item = (props) => {
     <div className="item-container">
         <Link to={`/movie/${props.id}`}>
         <div className="item-image">
-            <img src={`https://image.tmdb.org/t/p/w500${props.poster_path}`} alt="" />
+            <img src={props.image} alt="" />
         </div>
         </Link>
         <div className="item-specs">

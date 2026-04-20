@@ -5,23 +5,24 @@ import { useState } from 'react'
 import './HomePageComponent.css'
 import BannerComponent from './BannerComponent/BannerComponent'
 import Collection from './Collection/Collection.jsx'
+import customFetch from '../../Utils/customFetch.js'
+import { redirect } from 'react-router-dom'
 
-const HomePageComponent = () => {
+export const loader = async () => {
+  try{
+    const { data } = await customFetch.get('/movies/');
+    return data;
+  } catch (error) {
+    console.log(error)
+    return redirect("/")
+  }
+}
 
-const [movies, setMovies] = useState([])
-
-const loadMovies = async () => {
-    const movies = await getMovies();
-    setMovies(movies)
-  };
-
-    useEffect(() => {
-        loadMovies()
-  }, []);
-
+const HomePageComponent = ({movies}) => {
+  console.log(movies)
   const banner_movies = movies.slice(0,5)
   const new_movies = movies.slice(0,10)
-  const recommended_movies = movies.slice(10, 20)
+  const recommended_movies = movies.slice(5, 15)
 
   return (
     <div>

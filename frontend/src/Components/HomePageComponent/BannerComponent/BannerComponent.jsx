@@ -30,7 +30,7 @@ const Slider = SliderImport.default
                 banner_movies.map(movie => (
                     <div key={movie.id} className="banner-movie-element">
                         <div className="banner-movie-image">
-                            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" />
+                            <img src={movie.image} alt="" />
                         </div>
                         <div className="banner-movie-info">
                             <h1>{movie.title}</h1>
@@ -40,7 +40,7 @@ const Slider = SliderImport.default
                                 <p><BiSolidUpvote size={15} color='red'/>{movie.vote_count}</p>
                                 <p>Accion, Aventura</p>
                             </div>
-                            <p>{movie.overview}</p>
+                            <p>{movie.description}</p>
                             <Link to={`/movie/${movie.id}`}><button className='big-button'><CiCirclePlus size={20}/>Ver mas</button></Link>
                         </div>
                         
