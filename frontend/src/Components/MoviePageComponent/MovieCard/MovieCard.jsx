@@ -7,19 +7,10 @@ import { FaClock } from "react-icons/fa";
 import { IoLocationSharp } from "react-icons/io5";
 import { MdMovie } from "react-icons/md";
 import { MdAttachMoney } from "react-icons/md";
+import ActorCollection from '../ActorCollection/ActorCollection';
 
 const MovieCard = (props) => {
-
-    console.log(props)
-
-    let genre_list =[
-        {
-            genre: 'Accion'
-        },
-        {
-            genre: 'Aventura'
-        }
-    ]
+    
 
     let specs_list = [
         {
@@ -40,7 +31,7 @@ const MovieCard = (props) => {
         {
             logo: <MdMovie size={25} color='rgb(230, 81, 81)'/>,
             label: 'Estudio',
-            data: 'Illumination'
+            data: props.studio.name
         },
         {
             logo: <MdAttachMoney size={25} color='rgb(230, 81, 81)'/>,
@@ -58,9 +49,9 @@ const MovieCard = (props) => {
                 <h1>{props.title}</h1>
                 <div className="movie-card-genres">
                     {
-                        genre_list.map((genre, index) => (
+                        props.genres.map((genre, index) => (
                             <div className="genre-element">
-                                <h4>{genre.genre}</h4>
+                                <h4>{genre.name}</h4>
                             </div>
                         ))
                     }
@@ -92,6 +83,7 @@ const MovieCard = (props) => {
                     ))
                 }
             </div>
+            <ActorCollection/>
         </div>
     </div>
   )
