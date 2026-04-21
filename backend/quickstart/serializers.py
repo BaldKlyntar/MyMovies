@@ -22,10 +22,11 @@ class ReviewSerializer(serializers.ModelSerializer):
 class RoleSerializer(serializers.ModelSerializer):
     actor_name = serializers.CharField(source='actor.name')
     actor_image = serializers.CharField(source='actor.image')
+    tmdb_id = serializers.IntegerField(source='actor.tmdb_id')
 
     class Meta:
         model = Role
-        fields = ['actor_name', 'actor_image', 'character_name']
+        fields = ['actor_name', 'actor_image', 'character_name', 'tmdb_id']
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:

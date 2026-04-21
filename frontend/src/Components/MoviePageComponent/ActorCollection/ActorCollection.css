@@ -1,0 +1,33 @@
+.actor-collection-container{
+    width: 95%;
+    align-self: center;
+    justify-self: center;
+
+}
+
+.actor-collection-list{
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    overflow-x: scroll;
+    border-radius: 5px;
+}
+
+.actor-card{
+    background-color: rgb(53, 53, 53);
+    padding: 1rem;
+    border-radius: 5px;
+
+}
+
+.actor-card img{
+    width: 10rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.6s;
+}
+
+.actor-card img:hover{
+    transform: scale(1.03);
+
+}

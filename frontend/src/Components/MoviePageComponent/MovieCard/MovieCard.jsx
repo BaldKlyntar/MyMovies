@@ -39,6 +39,7 @@ const MovieCard = (props) => {
             data: props.gross
         }
     ]
+
   return (
     <div className="movie-card-container">
         <div className="movie-card-image">
@@ -83,7 +84,6 @@ const MovieCard = (props) => {
                     ))
                 }
             </div>
-            <ActorCollection/>
         </div>
     </div>
   )

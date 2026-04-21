@@ -7,6 +7,7 @@ import MovieCard from './MovieCard/MovieCard'
 import ReviewForm from './ReviewForm/ReviewForm'
 import ReviewList from './ReviewList/ReviewList'
 import customFetch from '../../Utils/customFetch'
+import ActorCollection from './ActorCollection/ActorCollection'
 
 export const loader = async ({ params }) => {
 
@@ -26,10 +27,10 @@ export const loader = async ({ params }) => {
 const MoviePageComponent = ({movie}) => {
   
   let movie_reviews = movie.reviews
-  console.log(movie_reviews)
   return (
     <div className="movie-page-container">
       <MovieCard {...movie}/>
+      <ActorCollection actors = {movie.roles}/>
       <ReviewForm {...movie} />
       <ReviewList reviews = {movie_reviews}/>
     </div>

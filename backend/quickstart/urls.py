@@ -10,7 +10,8 @@ from .views import (
     create_review,
     update_review,
     delete_review,
-    import_movie
+    import_movie,
+    get_actors
 )
 
 urlpatterns = [
@@ -25,4 +26,5 @@ urlpatterns = [
     path("reviews/create/", create_review),
     path("reviews/<int:id>/update/", update_review),
     path("reviews/<int:id>/delete/", delete_review),
+    path('actors/<int:tmdb_id>/', get_actors)
 ]

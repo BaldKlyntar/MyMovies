@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .models import Movie,  Review, Genre, Studio, Actor, Role
 from .serializers import MovieSerializer, ReviewSerializer, MovieDetailSerializer, ActorSerializer, GenreSerializer
 from rest_framework import status
-from .utils.tmdb import fetch_movie, map_movie_data, fetch_movie_credits
+from .utils.tmdb import fetch_movie, map_movie_data, fetch_movie_credits, fetch_actor_details
 
 #----------------------------------------MOVIES----------------------------------------------
 
@@ -174,7 +174,20 @@ def delete_review(request, id):
 #----------------------------------------ACTORS----------------------------------------------
 
 @api_view(['GET'])
-def get_actors(request):
-    actors = Actor.objects.all()
-    serializer = ActorSerializer(actors, many=True)
-    return Response(serializer.data)
+def get_actors(request, tmdb_id):
+
+    data = fetch_actor_details(tmdb_id)
+
+    if not data:
+        return Response({'error': 'Actor no encontrado'}, status=404)
+    
+    actor_data = {
+        "name": data.get("name"),
+        "biography": data.get("biography"),
+        "birthday": data.get("birthday"),
+        "place_of_birth": data.get("place_of_birth"),
+        "image": f"https://image.tmdb.org/t/p/w500{data.get('profile_path')}"
+        if data.get("profile_path") else None
+    }
+
+    return Response(actor_data)

@@ -1,5 +1,6 @@
 import {createBrowserRouter, Navigate, Outlet, RouterProvider} from 'react-router-dom'
 import { 
+  ActorPage,
   HomeLayout,
   HomePage,
   MoviePage,
@@ -7,6 +8,7 @@ import {
 
  import { loader as movieLoader } from './Components/HomePageComponent/HomePageComponent'
  import { loader as singleMovieLoader } from './Components/MoviePageComponent/MoviePageComponent'
+ import { loader as actorLoader } from './Components/ActorPageComponent/ActorPageComponent'
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,11 @@ const router = createBrowserRouter([
         element: <MoviePage/>,
         loader: singleMovieLoader
 
+      },
+      {
+        path: 'actor/:tmdb_id',
+        element: <ActorPage/>,
+        loader: actorLoader
       }
     ]
   }

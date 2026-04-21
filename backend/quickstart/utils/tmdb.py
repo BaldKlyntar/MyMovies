@@ -1,6 +1,22 @@
 import requests
 from django.conf import settings
 
+def fetch_actor_details(tmdb_id):
+    url = f"{settings.TMDB_BASE_URL}/person/{tmdb_id}"
+
+    headers = {
+        "Authorization": f"Bearer {settings.TMDB_TOKEN}",
+        "Content-Type": "application/json;charset=utf-8"
+    }
+
+    response = requests.get(url, headers=headers)
+
+    if response.status_code != 200:
+        return None
+
+    return response.json()
+
+
 
 def fetch_movie(tmdb_id):
     url = f"{settings.TMDB_BASE_URL}/movie/{tmdb_id}"
