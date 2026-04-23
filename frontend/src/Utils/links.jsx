@@ -7,7 +7,7 @@ import React from "react";
     },
     {
         text: 'Iniciar Sesion',
-        path: '.'
+        path: '/login'
     }
 ]
 

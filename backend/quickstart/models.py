@@ -37,6 +37,8 @@ class User(models.Model):
     name = models.CharField(blank=False, null=False, max_length= 25)
     lastName = models.CharField(blank= False, null=False, max_length=25)
     follows = models.ManyToManyField("self", symmetrical=False, related_name="followers", blank=True)
+    password = models.CharField(blank=False, null= False)
+    username = models.CharField(blank=False, null=False, max_length= 25)
 
 
     def __str__(self):

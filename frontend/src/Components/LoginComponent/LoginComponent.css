@@ -1,0 +1,45 @@
+.login-component-container{
+    background-color: rgb(58, 58, 58);
+    width: 50%;
+    justify-self: center;
+    padding: 2rem 1rem;
+    margin: 1rem;
+    border-radius: 10px;
+}
+
+.login-component-container hr{
+    border: 1px solid rgb(255, 72, 72);
+
+}
+
+.login-component-head{
+    justify-self: center;
+}
+
+.login-component-input{
+    width: 100%;
+}
+
+.login-component-input input{
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+.login-component-container button{
+    justify-self: center;
+
+}
+
+@media (max-width: 500px) {
+
+    .login-component-head h1{
+        font-size: 18px;
+    }
+
+    .login-component-input h4{
+        font-size: 14px;
+    }
+    
+}

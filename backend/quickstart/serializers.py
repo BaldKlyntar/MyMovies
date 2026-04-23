@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Movie, Review, Role, Genre, Actor, Studio
+from .models import Movie, Review, Role, Genre, Actor, Studio, User
 from django.db.models import Avg, Count
 
 class MovieSerializer(serializers.ModelSerializer):
@@ -7,8 +7,14 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = '__all__'
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'lastName', 'username']
+
 
 class ReviewSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source='user.username', read_only=True)
     class Meta:
         model = Review
         fields = ['id', 'movie', 'user', 'text', 'score', 'createdAt']

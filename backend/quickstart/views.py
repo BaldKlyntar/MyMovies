@@ -1,9 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Movie,  Review, Genre, Studio, Actor, Role
+from .models import Movie,  Review, Genre, Studio, Actor, Role, User
 from .serializers import MovieSerializer, ReviewSerializer, MovieDetailSerializer, ActorSerializer, GenreSerializer
 from rest_framework import status
 from .utils.tmdb import fetch_movie, map_movie_data, fetch_movie_credits, fetch_actor_details
+from django.middleware.csrf import get_token
 
 #----------------------------------------MOVIES----------------------------------------------
 
@@ -135,14 +136,28 @@ def get_review(request, id):
     serializer = ReviewSerializer(review)
     return Response(serializer.data)
 
+def get_logged_user(request):
+    user_id = request.session.get("user_id")
+    if not user_id:
+        return None
+    try:
+        return User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return None
+
 @api_view(['POST'])
 def create_review(request):
+    user = get_logged_user(request)
+
+    if not user:
+        return Response({"error": "Usuario no autenticado"}, status=401)
+
     serializer = ReviewSerializer(data=request.data)
 
     if serializer.is_valid():
-        serializer.save()
+        serializer.save(user=user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-
+    
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PUT', 'PATCH'])
@@ -191,3 +206,69 @@ def get_actors(request, tmdb_id):
     }
 
     return Response(actor_data)
+
+#----------------------------------------USERS-----------------------------------------------
+
+
+@api_view(['POST'])
+def login_user(request):
+    username = request.data.get("username")
+    password = request.data.get("password")
+
+    try:
+        user = User.objects.get(username=username)
+    except User.DoesNotExist:
+        return Response({"error": "No hay una cuenta asociada a este usuario"}, status=404)
+
+    if user.password != password:
+        return Response({"error": "Contraseña incorrecta"}, status=401)
+
+    request.session['user_id'] = user.id
+    csrf_token = get_token(request)
+
+    return Response({
+        "message": "Login exitoso",
+        "user": {
+            "id": user.id,
+            "username": user.username
+        },
+        "csrfToken": csrf_token
+    })
+
+@api_view(['GET'])
+def get_user(request):
+    user_id = request.session.get("user_id")
+
+    if not user_id:
+        return Response({
+            "authenticated": False
+        }, status=401)
+    
+    try:
+        user = User.objects.get(id=user_id)
+    except User.DoesNotExist:
+        return Response({
+            "authenticated": False
+        }, status=401)
+
+    return Response({
+        "authenticated": True,
+        "user": {
+            "id": user.id,
+            "username": user.username,
+            "name": user.name,
+            "lastName": user.lastName
+        }
+    })
+
+
+
+@api_view(['POST'])
+def logout_user(request):
+    request.session.flush()
+
+    return Response({
+        "message": "Logout exitoso"
+    })
+
+
