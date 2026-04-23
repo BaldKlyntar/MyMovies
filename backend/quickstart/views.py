@@ -153,6 +153,7 @@ def create_review(request):
         return Response({"error": "Usuario no autenticado"}, status=401)
 
     serializer = ReviewSerializer(data=request.data)
+    print(serializer)
 
     if serializer.is_valid():
         serializer.save(user=user)

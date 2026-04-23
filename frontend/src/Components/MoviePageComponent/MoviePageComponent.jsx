@@ -25,13 +25,38 @@ export const loader = async ({ params }) => {
 
 
 const MoviePageComponent = ({movie}) => {
+
+    const [status, setStatus] = useState();
+
+    useEffect(() => {
+        const fetchAuthUser = async () => {
+        try {
+            const {data} = await customFetch.get('/status/');
+            setStatus(data)
+        } catch (error){
+            console.log(error)
+        } 
+        };
+
+        fetchAuthUser();
+        
+    }, [])
+    
+    let auth_flag = true
+
+    if (!status){
+      auth_flag = false
+    }
+
   
   let movie_reviews = movie.reviews
   return (
     <div className="movie-page-container">
       <MovieCard {...movie}/>
       <ActorCollection actors = {movie.roles}/>
-      <ReviewForm {...movie} />
+      {
+        auth_flag ? <ReviewForm {...movie} user_id = {status.user.id}  /> : <></>
+      }
       <ReviewList reviews = {movie_reviews}/>
     </div>
   )

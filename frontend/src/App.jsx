@@ -12,6 +12,7 @@ import {
  import { loader as actorLoader } from './Components/ActorPageComponent/ActorPageComponent'
  import { action as loginAction } from './Components/LoginComponent/LoginComponent'
  import { loader as authLoader } from './Components/Navbar/Navbar'
+ import { action as reviewAction } from './Components/MoviePageComponent/ReviewForm/ReviewForm'
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,8 @@ const router = createBrowserRouter([
       {
         path: 'movie/:id',
         element: <MoviePage/>,
-        loader: singleMovieLoader
+        loader: singleMovieLoader,
+        action: reviewAction
 
       },
       {
